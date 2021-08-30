@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Interfaces\" />
+    <None Remove="Implementartion\" />
+    <None Remove="assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Implementation\" />
+    <Folder Include="assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ShellModels\ShellModels.csproj" />
+  </ItemGroup>
+</Project>

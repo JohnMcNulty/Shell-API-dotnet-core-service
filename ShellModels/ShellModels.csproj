@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ReportingUnits\" />
-    <None Remove="Enums\" />
     <None Remove="RawData\" />
+    <None Remove="CsvHelper" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ReportingUnits\" />
-    <Folder Include="Enums\" />
     <Folder Include="RawData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="27.1.1" />
   </ItemGroup>
 </Project>

@@ -29,12 +29,11 @@ namespace ShellApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // inject services
             services.AddScoped<ISanitizedEnergyRecordsService, SanitizedEnergyRecordsService>();
-            services.AddScoped<IDataLoader, DataLoader>();
+            services.AddScoped(typeof(IDataLoaderGeneric), typeof(FlatFileDataLoaderGeneric));
 
             services.AddControllers();
-
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

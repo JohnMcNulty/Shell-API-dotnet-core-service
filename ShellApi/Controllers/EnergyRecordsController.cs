@@ -24,8 +24,8 @@ namespace ShellApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetShellDataByMeter")]
-        public string GetShellDataByMeter()
+        [Route("GetShellData")]
+        public string GetShellData()
         {
             var data = _recordsService.GetSanitizedData();
             var json = JsonSerializer.Serialize(data, jsonSerializerOptions);
@@ -33,25 +33,6 @@ namespace ShellApi.Controllers
             return json;
         }
 
-        [HttpGet]
-        [Route("GetShellDataByDate")]
-        public string GetShellDataByDate()
-        {
-            var data = _recordsService.GetSanitizedData(); //TODO : ByDate
-            var json = JsonSerializer.Serialize(data, jsonSerializerOptions);
-
-            return json;
-        }
-
-        [HttpGet]
-        [Route("GetShellDataByDataType")]
-        public string GetShellDataByDataType()
-        {
-            var data = _recordsService.GetSanitizedData(); //TODO : ByDataType
-            var json = JsonSerializer.Serialize(data, jsonSerializerOptions);
-
-            return json;
-        }
 
     }
 }

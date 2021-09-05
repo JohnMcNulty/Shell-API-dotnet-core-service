@@ -7,5 +7,11 @@ namespace ShellApiService.Interfaces
     public interface ISanitizedEnergyRecordsService
     {
         IList<ReportingUnit> GetSanitizedData();
+
+        IList<ReportingUnit> GetDataByMeter();
+
+        IList<ReportingUnit> GetDataByDataType();
+
+        IList<ReportingUnit> GetDataByDate();
     }
 }

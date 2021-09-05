@@ -22,11 +22,15 @@ namespace ShellApiService.Implementation
             this.dataLoader = dataLoader;
         }
 
+        /// <summary>
+        /// Get min/max/median grouped by meter, date and datatype
+        /// </summary>
+        /// <returns></returns>
         IList<ReportingUnit> ISanitizedEnergyRecordsService.GetSanitizedData()
         {
             IEnumerable<ReportingFields> data = GetMergedData();
 
-            // Distribute the data via an API based on Date (no time), *Meter* and Data Type
+            // Distribute the data via an API based on Date (no time), Meter and Data Type
             var results = new List<ReportingUnit>();
 
             // get distinct by meter, reporting date and data type
@@ -54,6 +58,107 @@ namespace ShellApiService.Implementation
             return results;
             
         }
+
+        /// <summary>
+        /// Get min/max/median grouped by meter
+        /// </summary>
+        /// <returns></returns>
+        IList<ReportingUnit> ISanitizedEnergyRecordsService.GetDataByMeter()
+        {
+            IEnumerable<ReportingFields> data = GetMergedData();
+
+            var results = new List<ReportingUnit>();
+
+            // get distinct by meter, reporting date and data type
+            var distinct = data.Select(d => new { d.Meter }).Distinct().ToList();
+
+            // get min,max & median 
+            foreach (var item in distinct)
+            {
+                // get set by Meter
+                var set = data.Where(d => d.Meter == item.Meter);
+
+                // get set calculations
+                var min = set.Min(d => d.EnergyDataValue);
+                var max = set.Max(d => d.EnergyDataValue);
+                var median = set.Select(d => d.EnergyDataValue).Median();
+
+                // create data point for reporting
+                var reportingUnit = new ReportingUnit(item.Meter, null, null, min, median, max);
+
+                results.Add(reportingUnit);
+            }
+
+            return results;
+        }
+
+        /// <summary>
+        /// Get min/max/median grouped by EnergyDataType
+        /// </summary>
+        /// <returns></returns>
+        IList<ReportingUnit> ISanitizedEnergyRecordsService.GetDataByDataType()
+        {
+            IEnumerable<ReportingFields> data = GetMergedData();
+
+            var results = new List<ReportingUnit>();
+
+            // get distinct by meter, reporting date and data type
+            var distinct = data.Select(d => new { d.EnergyDataType }).Distinct().ToList();
+
+            // get min,max & median 
+            foreach (var item in distinct)
+            {
+                // get set by EnergyDataType
+                var set = data.Where(d => d.EnergyDataType == item.EnergyDataType);
+
+                // get set calculations
+                var min = set.Min(d => d.EnergyDataValue);
+                var max = set.Max(d => d.EnergyDataValue);
+                var median = set.Select(d => d.EnergyDataValue).Median();
+
+                // create data point for reporting
+                var reportingUnit = new ReportingUnit(null, null, item.EnergyDataType, min, median, max);
+
+                results.Add(reportingUnit);
+            }
+
+            return results;
+        }
+
+
+        /// <summary>
+        /// Get min/max/median grouped by Date
+        /// </summary>
+        /// <returns></returns>
+        IList<ReportingUnit> ISanitizedEnergyRecordsService.GetDataByDate()
+        {
+            IEnumerable<ReportingFields> data = GetMergedData();
+
+            var results = new List<ReportingUnit>();
+
+            // get distinct by reporting date
+            var distinct = data.Select(d => new { d.RecordDateString }).Distinct().ToList();
+
+            // get min,max & median 
+            foreach (var item in distinct)
+            {
+                // get set by Date
+                var set = data.Where(d => d.RecordDateString == item.RecordDateString);
+
+                // get set calculations
+                var min = set.Min(d => d.EnergyDataValue);
+                var max = set.Max(d => d.EnergyDataValue);
+                var median = set.Select(d => d.EnergyDataValue).Median();
+
+                // create data point for reporting
+                var reportingUnit = new ReportingUnit(null, item.RecordDateString, null, min, median, max);
+
+                results.Add(reportingUnit);
+            }
+
+            return results;
+        }
+
 
         /// <summary>
         /// Processes the loaded files, extracts the relevant fields, and merges data from both sets.
@@ -85,5 +190,6 @@ namespace ShellApiService.Implementation
             var unionedSets = lpSubset.Union(touSubset);
             return unionedSets;
         }
+
     }
 }

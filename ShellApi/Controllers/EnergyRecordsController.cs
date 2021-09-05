@@ -20,6 +20,7 @@ namespace ShellApi.Controllers
             jsonSerializerOptions = new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                IgnoreNullValues = true // removing nulls from response
             };
         }
 
@@ -33,6 +34,34 @@ namespace ShellApi.Controllers
             return json;
         }
 
+        [HttpGet]
+        [Route("GetShellDataGroupedByMeter")]
+        public string GetShellDataByMeter(string meterCode)
+        {
+            var data = _recordsService.GetDataByMeter();
+            var json = JsonSerializer.Serialize(data, jsonSerializerOptions);
 
+            return json;
+        }
+
+        [HttpGet]
+        [Route("GetShellDataGroupedByDate")]
+        public string GetShellDataByDate(string meterCode)
+        {
+            var data = _recordsService.GetDataByDate();
+            var json = JsonSerializer.Serialize(data, jsonSerializerOptions);
+
+            return json;
+        }
+
+        [HttpGet]
+        [Route("GetShellDataGroupedByDataType")]
+        public string GetShellDataByDataType(string meterCode)
+        {
+            var data = _recordsService.GetDataByDataType();
+            var json = JsonSerializer.Serialize(data, jsonSerializerOptions);
+
+            return json;
+        }
     }
 }

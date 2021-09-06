@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "abd02a26-bbe5-4cd4-8813-d81b6ac06e2c",
+		"name": "Shell API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get shell data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1/EnergyRecords/GetShellData",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"EnergyRecords",
+						"GetShellData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get shell data grouped by meter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1/EnergyRecords/GetShellDataGroupedByMeter",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"EnergyRecords",
+						"GetShellDataGroupedByMeter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get shell data grouped by data type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1/EnergyRecords/GetShellDataGroupedByDataType",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"EnergyRecords",
+						"GetShellDataGroupedByDataType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get shell data grouped by date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1/EnergyRecords/GetShellDataGroupedByDate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1",
+						"EnergyRecords",
+						"GetShellDataGroupedByDate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
